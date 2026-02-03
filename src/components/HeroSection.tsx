@@ -1,21 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { Play, Zap, Tv, Shield, Clock } from "lucide-react";
+import { Play, Zap, Tv, Shield } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
-
 const HeroSection = () => {
   const whatsappLink = "https://wa.me/5511916783168?text=Olá! 🎬 Quero Conhecer as Opções de Testes de 6h.";
-
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+      <div className="absolute inset-0 z-0" style={{
+      backgroundImage: `url(${heroBg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }} />
       
       {/* Overlay Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background z-10" />
@@ -27,7 +21,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Urgency Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 mb-6 animate-pulse">
-            <Clock className="w-4 h-4 text-primary" />
+            
             <span className="text-sm font-medium text-primary">Oferta por tempo limitado</span>
           </div>
 
@@ -48,17 +42,22 @@ const HeroSection = () => {
 
           {/* Benefits */}
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-10">
-            {[
-              { icon: Tv, text: "+20.000 Canais" },
-              { icon: Play, text: "+80.000 Filmes e Séries" },
-              { icon: Zap, text: "Sem Travamentos" },
-              { icon: Shield, text: "100% Seguro" },
-            ].map((benefit, index) => (
-              <div key={index} className="flex items-center gap-2 text-sm md:text-base">
+            {[{
+            icon: Tv,
+            text: "+20.000 Canais"
+          }, {
+            icon: Play,
+            text: "+80.000 Filmes e Séries"
+          }, {
+            icon: Zap,
+            text: "Sem Travamentos"
+          }, {
+            icon: Shield,
+            text: "100% Seguro"
+          }].map((benefit, index) => <div key={index} className="flex items-center gap-2 text-sm md:text-base">
                 <benefit.icon className="w-5 h-5 text-primary" />
                 <span className="text-foreground">{benefit.text}</span>
-              </div>
-            ))}
+              </div>)}
           </div>
 
           {/* CTA Button */}
@@ -84,8 +83,6 @@ const HeroSection = () => {
           <div className="w-1 h-2 bg-primary rounded-full animate-pulse" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
