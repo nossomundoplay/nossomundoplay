@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 
 const FloatingWhatsApp = () => {
-  const whatsappLink = "https://wa.me/5511999999999?text=Olá! Quero saber mais sobre o IPTV!";
+  const whatsappLink = "https://wa.me/5511916783168?text=Olá! 🎬 Quero Conhecer as Opções de Testes de 6h.";
 
   return (
     <a

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Clock, Shield, Zap } from "lucide-react";
 
 const FreeTrialSection = () => {
-  const whatsappLink = "https://wa.me/5511999999999?text=Olá! Quero testar o IPTV grátis por 6 horas!";
+  const whatsappLink = "https://wa.me/5511916783168?text=Olá! 🎬 Quero Conhecer as Opções de Testes de 6h.";
 
   return (
     <section className="py-20 bg-background relative overflow-hidden">

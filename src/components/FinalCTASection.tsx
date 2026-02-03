@@ -3,7 +3,7 @@ import { MessageCircle, Phone, Clock, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const FinalCTASection = () => {
-  const whatsappLink = "https://wa.me/5511999999999?text=Olá! Quero saber mais sobre o IPTV!";
+  const whatsappLink = "https://wa.me/5511916783168?text=Olá! 🎬 Quero Conhecer as Opções de Testes de 6h.";
   
   const [timeLeft, setTimeLeft] = useState({
     hours: 2,
