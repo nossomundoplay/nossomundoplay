@@ -58,7 +58,7 @@ const plans = [
 ];
 
 const PricingSection = () => {
-  const whatsappLink = "https://wa.me/5511999999999?text=Olá! Quero assinar o plano ";
+  const whatsappLink = "https://wa.me/5511916783168?text=Olá! 🎬 Quero Conhecer as Opções de Testes de 6h.";
 
   return (
     <section id="planos" className="py-20 bg-secondary/30">

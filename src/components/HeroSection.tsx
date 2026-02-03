@@ -3,7 +3,7 @@ import { Play, Zap, Tv, Shield, Clock } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
-  const whatsappLink = "https://wa.me/5511999999999?text=Olá! Quero testar o IPTV grátis por 6 horas!";
+  const whatsappLink = "https://wa.me/5511916783168?text=Olá! 🎬 Quero Conhecer as Opções de Testes de 6h.";
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
