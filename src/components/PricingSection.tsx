@@ -4,7 +4,7 @@ import { Check, Star, Flame, Crown } from "lucide-react";
 const plans = [
   {
     name: "Mensal",
-    price: "39,90",
+    price: "29,90",
     period: "/mês",
     description: "Ideal para testar",
     features: [
