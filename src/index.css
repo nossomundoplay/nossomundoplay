@@ -128,7 +128,7 @@
   }
 
   .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+    animation: pulse-glow 4s ease-in-out infinite;
   }
 
   .animate-count-up {
@@ -150,6 +150,15 @@
 }
 
 @keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px hsl(142 70% 45% / 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 40px hsl(142 70% 45% / 0.6);
+  }
+}
+
+@keyframes pulse-glow-slow {
   0%, 100% { 
     box-shadow: 0 0 20px hsl(142 70% 45% / 0.4);
   }
