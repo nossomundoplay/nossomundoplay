@@ -1,3 +1,11 @@
+# Regras para todos os bots
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nova-stream-spot.lovable.app/sitemap.xml
+
+# Bots específicos
 User-agent: Googlebot
 Allow: /
 
@@ -10,5 +18,10 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
+
+# Bloquear recursos desnecessários
+User-agent: *
+Disallow: /api/
+Disallow: /*.json$
