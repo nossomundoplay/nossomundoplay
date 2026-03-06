@@ -1,89 +1,28 @@
+import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { blogPosts, categories } from "@/data/blogPosts";
 
-const blogPosts = [
-  {
-    slug: "o-que-e-iptv-guia-completo",
-    title: "O Que é IPTV? Guia Completo Para Iniciantes em 2024",
-    excerpt: "Descubra o que é IPTV, como funciona essa tecnologia revolucionária e por que ela está transformando a forma como consumimos entretenimento.",
-    category: "Guias",
-    date: "15 Jan 2024",
-    readTime: "8 min",
-    featured: true,
-  },
-  {
-    slug: "como-escolher-melhor-servico-iptv",
-    title: "Como Escolher o Melhor Serviço de IPTV: 7 Critérios Essenciais",
-    excerpt: "Aprenda a identificar um serviço de IPTV de qualidade. Dicas importantes sobre estabilidade, suporte, catálogo e muito mais.",
-    category: "Dicas",
-    date: "12 Jan 2024",
-    readTime: "6 min",
-    featured: true,
-  },
-  {
-    slug: "configurar-iptv-smart-tv-samsung-lg",
-    title: "Como Configurar IPTV na Smart TV Samsung e LG - Passo a Passo",
-    excerpt: "Tutorial completo com imagens para instalar e configurar IPTV nas principais marcas de Smart TV do mercado.",
-    category: "Tutoriais",
-    date: "10 Jan 2024",
-    readTime: "5 min",
-    featured: false,
-  },
-  {
-    slug: "iptv-vs-tv-cabo-comparativo",
-    title: "IPTV vs TV a Cabo: Comparativo Completo de Custo-Benefício",
-    excerpt: "Análise detalhada comparando preços, qualidade, variedade de conteúdo e praticidade entre IPTV e TV a cabo tradicional.",
-    category: "Comparativos",
-    date: "08 Jan 2024",
-    readTime: "7 min",
-    featured: false,
-  },
-  {
-    slug: "melhores-aplicativos-iptv-2024",
-    title: "Os 5 Melhores Aplicativos de IPTV em 2024",
-    excerpt: "Conheça os aplicativos mais populares e confiáveis para assistir IPTV em qualquer dispositivo, com prós e contras de cada um.",
-    category: "Aplicativos",
-    date: "05 Jan 2024",
-    readTime: "6 min",
-    featured: false,
-  },
-  {
-    slug: "velocidade-internet-iptv-4k",
-    title: "Qual Velocidade de Internet Preciso Para IPTV em 4K?",
-    excerpt: "Entenda os requisitos de conexão para cada qualidade de vídeo e aprenda a otimizar sua rede para uma melhor experiência.",
-    category: "Técnico",
-    date: "03 Jan 2024",
-    readTime: "4 min",
-    featured: false,
-  },
-  {
-    slug: "resolver-problemas-travamento-iptv",
-    title: "IPTV Travando? 10 Soluções Para Resolver o Problema",
-    excerpt: "Guia prático com as principais causas de travamento em IPTV e como resolver cada uma delas de forma simples.",
-    category: "Solução de Problemas",
-    date: "01 Jan 2024",
-    readTime: "5 min",
-    featured: false,
-  },
-  {
-    slug: "assistir-futebol-iptv",
-    title: "Como Assistir Futebol ao Vivo com IPTV: Guia do Torcedor",
-    excerpt: "Tudo sobre como acompanhar os principais campeonatos de futebol através do IPTV, com qualidade e sem atrasos.",
-    category: "Esportes",
-    date: "28 Dez 2023",
-    readTime: "5 min",
-    featured: false,
-  },
-];
+import iptvGuiaImg from "@/assets/blog/iptv-guia-completo.jpg";
+import escolherServicoImg from "@/assets/blog/escolher-servico-iptv.jpg";
 
-const categories = ["Todos", "Guias", "Dicas", "Tutoriais", "Comparativos", "Técnico"];
+const coverImages: Record<string, string> = {
+  "o-que-e-iptv-guia-completo": iptvGuiaImg,
+  "como-escolher-melhor-servico-iptv": escolherServicoImg,
+};
 
 const Blog = () => {
-  const featuredPosts = blogPosts.filter((post) => post.featured);
-  const regularPosts = blogPosts.filter((post) => !post.featured);
+  const [activeCategory, setActiveCategory] = useState("Todos");
+
+  const filtered = activeCategory === "Todos"
+    ? blogPosts
+    : blogPosts.filter((p) => p.category === activeCategory);
+
+  const featuredPosts = filtered.filter((post) => post.featured);
+  const regularPosts = filtered.filter((post) => !post.featured);
 
   return (
     <Layout>
@@ -93,7 +32,6 @@ const Blog = () => {
         <link rel="canonical" href="https://nova-stream-spot.lovable.app/blog" />
       </Helmet>
 
-      {/* Hero Section */}
       <section className="py-20 bg-gradient-hero">
         <div className="container px-4">
           <div className="text-center mb-12">
@@ -113,8 +51,9 @@ const Blog = () => {
             {categories.map((category) => (
               <button
                 key={category}
+                onClick={() => setActiveCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  category === "Todos"
+                  category === activeCategory
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary text-muted-foreground hover:bg-primary/20 hover:text-primary"
                 }`}
@@ -125,85 +64,95 @@ const Blog = () => {
           </div>
 
           {/* Featured Posts */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {featuredPosts.map((post) => (
-              <article
-                key={post.slug}
-                className="glass-card rounded-2xl overflow-hidden group hover:border-primary/50 transition-all"
-              >
-                <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <BookOpen className="w-16 h-16 text-primary/30" />
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary text-primary-foreground">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      {post.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      {post.readTime}
-                    </span>
-                  </div>
-                  <h2 className="font-heading text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h2>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{post.excerpt}</p>
-                  <Button variant="ghost" size="sm" className="text-primary p-0 hover:bg-transparent">
-                    Ler mais <ArrowRight className="w-4 h-4 ml-1" />
-                  </Button>
-                </div>
-              </article>
-            ))}
-          </div>
+          {featuredPosts.length > 0 && (
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
+              {featuredPosts.map((post) => (
+                <Link to={`/blog/${post.slug}`} key={post.slug}>
+                  <article className="glass-card rounded-2xl overflow-hidden group hover:border-primary/50 transition-all h-full">
+                    <div className="aspect-video relative overflow-hidden">
+                      {coverImages[post.slug] ? (
+                        <img
+                          src={coverImages[post.slug]}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                          <BookOpen className="w-16 h-16 text-primary/30" />
+                        </div>
+                      )}
+                      <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary text-primary-foreground">
+                          {post.category}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {post.date}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          {post.readTime}
+                        </span>
+                      </div>
+                      <h2 className="font-heading text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                        {post.title}
+                      </h2>
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+                      <span className="text-primary text-sm font-medium inline-flex items-center gap-1">
+                        Ler mais <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          )}
 
           {/* Regular Posts Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {regularPosts.map((post) => (
-              <article
-                key={post.slug}
-                className="glass-card rounded-2xl p-6 group hover:border-primary/50 transition-all"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-secondary text-muted-foreground">
-                    {post.category}
-                  </span>
-                  <span className="text-xs text-muted-foreground flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    {post.readTime}
-                  </span>
-                </div>
-                <h3 className="font-heading text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                  {post.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{post.excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">{post.date}</span>
-                  <Button variant="ghost" size="sm" className="text-primary p-0 hover:bg-transparent">
-                    Ler <ArrowRight className="w-4 h-4 ml-1" />
-                  </Button>
-                </div>
-              </article>
-            ))}
-          </div>
+          {regularPosts.length > 0 && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {regularPosts.map((post) => (
+                <Link to={`/blog/${post.slug}`} key={post.slug}>
+                  <article className="glass-card rounded-2xl p-6 group hover:border-primary/50 transition-all h-full">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-secondary text-muted-foreground">
+                        {post.category}
+                      </span>
+                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </span>
+                    </div>
+                    <h3 className="font-heading text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-muted-foreground">{post.date}</span>
+                      <span className="text-primary text-sm font-medium inline-flex items-center gap-1">
+                        Ler <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          )}
 
-          {/* Load More */}
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg">
-              Carregar mais artigos
-            </Button>
-          </div>
+          {filtered.length === 0 && (
+            <p className="text-center text-muted-foreground py-12">
+              Nenhum artigo encontrado nesta categoria.
+            </p>
+          )}
         </div>
       </section>
 
-      {/* Newsletter Section */}
+      {/* Newsletter */}
       <section className="py-20 bg-secondary/30">
         <div className="container px-4">
           <div className="max-w-2xl mx-auto text-center">
