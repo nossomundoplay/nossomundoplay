@@ -425,4 +425,4 @@ O IPTV democratizou o acesso ao futebol. Com o Nova Stream, você assiste a todo
   },
 ];
 
-export const categories = ["Todos", "Guias", "Dicas", "Tutoriais", "Comparativos", "Técnico", "Aplicativos", "Esportes", "Solução de Problemas"];
+export const categories = ["Todos", "Tendências", "Guias", "Dicas", "Tutoriais", "Comparativos", "Técnico", "Aplicativos", "Esportes", "Solução de Problemas"];
