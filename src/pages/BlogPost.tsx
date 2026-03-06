@@ -8,11 +8,13 @@ import { blogPosts } from "@/data/blogPosts";
 import iptvGuiaImg from "@/assets/blog/iptv-guia-completo.jpg";
 import escolherServicoImg from "@/assets/blog/escolher-servico-iptv.jpg";
 import futuroTvImg from "@/assets/blog/futuro-tv-streaming-2026.jpg";
+import multiDispositivosImg from "@/assets/blog/iptv-multiplos-dispositivos.jpg";
 
 const coverImages: Record<string, string> = {
   "o-que-e-iptv-guia-completo": iptvGuiaImg,
   "como-escolher-melhor-servico-iptv": escolherServicoImg,
   "futuro-da-tv-streaming-2026": futuroTvImg,
+  "como-usar-iptv-em-qualquer-dispositivo": multiDispositivosImg,
 };
 
 const BlogPost = () => {
